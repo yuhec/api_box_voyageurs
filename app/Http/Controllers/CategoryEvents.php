@@ -7,21 +7,22 @@ use App\Http\Resources;
 use App\Models;
 use Validator;
 
-class Destinations extends Controller
+class CategoryEvents extends Controller
 {
 
     private static $validationRules = [
-        'city' => 'required|string|max:255',
-        'country' => 'required|string|max:255',
+        'category_id' => 'required|alpha_dash',
+        'event_id' => 'required|alpha_dash',
+        'box_id' => 'required|alpha_dash',
     ];
 
     public function index (Request $request) {
-        $elements = Models\Destinations::paginate($request->input('results_per_page'));
+        $elements = Models\CategoryEvents::paginate($request->input('results_per_page'));
 
-        return Resources\Destinations::collection($elements);
+        return Resources\CategoryEvents::collection($elements);
     }
     public function show ($id) {
-        return new Resources\Destinations(Models\Destinations::findOrFail($id));
+        return new Resources\CategoryEvents(Models\CategoryEvents::findOrFail($id));
     }
     public function create (Request $request) {
         $validator = Validator::make($request->all(), static::$validationRules);
@@ -30,7 +31,7 @@ class Destinations extends Controller
             return abort(400, $validator->errors()->__toString());
         }
 
-        $element = new Models\Destinations;
+        $element = new Models\CategoryEvents;
         $element->fill($request->all());
         $element->save();
 
@@ -43,16 +44,16 @@ class Destinations extends Controller
             return abort(400, $validator->errors()->__toString());
         }
 
-        $element = Models\Destinations::findOrFail($id);
+        $element = Models\CategoryEvents::findOrFail($id);
         $element->fill($request->all());
         $element->save();
 
         return $element;
     }
     public function delete ($id) {
-        $element = Models\Destinations::findOrFail($id);
+        $element = Models\CategoryEvents::findOrFail($id);
         $element->delete();
 
-        return new Resources\Destinations($element);
+        return new Resources\CategoryEvents($element);
     }
 }

@@ -7,21 +7,20 @@ use App\Http\Resources;
 use App\Models;
 use Validator;
 
-class Destinations extends Controller
+class Marks extends Controller
 {
 
     private static $validationRules = [
-        'city' => 'required|string|max:255',
-        'country' => 'required|string|max:255',
+        'value' => 'required|float',
     ];
 
     public function index (Request $request) {
-        $elements = Models\Destinations::paginate($request->input('results_per_page'));
+        $elements = Models\Marks::paginate($request->input('results_per_page'));
 
-        return Resources\Destinations::collection($elements);
+        return Resources\Marks::collection($elements);
     }
     public function show ($id) {
-        return new Resources\Destinations(Models\Destinations::findOrFail($id));
+        return new Resources\Marks(Models\Marks::findOrFail($id));
     }
     public function create (Request $request) {
         $validator = Validator::make($request->all(), static::$validationRules);
@@ -30,7 +29,7 @@ class Destinations extends Controller
             return abort(400, $validator->errors()->__toString());
         }
 
-        $element = new Models\Destinations;
+        $element = new Models\Marks;
         $element->fill($request->all());
         $element->save();
 
@@ -43,16 +42,16 @@ class Destinations extends Controller
             return abort(400, $validator->errors()->__toString());
         }
 
-        $element = Models\Destinations::findOrFail($id);
+        $element = Models\Marks::findOrFail($id);
         $element->fill($request->all());
         $element->save();
 
         return $element;
     }
     public function delete ($id) {
-        $element = Models\Destinations::findOrFail($id);
+        $element = Models\Marks::findOrFail($id);
         $element->delete();
 
-        return new Resources\Destinations($element);
+        return new Resources\Marks($element);
     }
 }

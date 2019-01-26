@@ -7,21 +7,28 @@ use App\Http\Resources;
 use App\Models;
 use Validator;
 
-class Destinations extends Controller
+class Addresses extends Controller
 {
-
     private static $validationRules = [
-        'city' => 'required|string|max:255',
-        'country' => 'required|string|max:255',
+        'line_1' => 'nullable|string',
+        'line_2' => 'nullable|string|max:255',
+        'line_3' => 'nullable|string|max:255',
+        'postcode' => 'nullable|string|max:255',
+        'city' => 'nullable|string|max:255',
+        'province' => 'nullable|string|max:255',
+        'country' => 'nullable|string|max:255',
+        'longitude' => 'nullable|string|max:255',
+        'latitude' => 'nullable|string|max:255',
     ];
 
     public function index (Request $request) {
-        $elements = Models\Destinations::paginate($request->input('results_per_page'));
+        $addresses = Models\Addresses::orderBy('city', 'desc')
+            ->paginate($request->input('results_per_page'));
 
-        return Resources\Destinations::collection($elements);
+        return Resources\Addresses::collection($addresses);
     }
     public function show ($id) {
-        return new Resources\Destinations(Models\Destinations::findOrFail($id));
+        return new Resources\Addresses(Models\Addresses::findOrFail($id));
     }
     public function create (Request $request) {
         $validator = Validator::make($request->all(), static::$validationRules);
@@ -30,7 +37,7 @@ class Destinations extends Controller
             return abort(400, $validator->errors()->__toString());
         }
 
-        $element = new Models\Destinations;
+        $element = new Models\Addresses;
         $element->fill($request->all());
         $element->save();
 
@@ -43,16 +50,16 @@ class Destinations extends Controller
             return abort(400, $validator->errors()->__toString());
         }
 
-        $element = Models\Destinations::findOrFail($id);
+        $element = Models\Addresses::findOrFail($id);
         $element->fill($request->all());
         $element->save();
 
         return $element;
     }
     public function delete ($id) {
-        $element = Models\Destinations::findOrFail($id);
+        $element = Models\Addresses::findOrFail($id);
         $element->delete();
 
-        return new Resources\Destinations($element);
+        return new Resources\Addresses($element);
     }
 }
