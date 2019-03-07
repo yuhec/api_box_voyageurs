@@ -1,9 +1,9 @@
 <?php
 
-namespace App;
+namespace api\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Uuids;
+use api\Uuids;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Items extends Model
@@ -23,6 +23,6 @@ class Items extends Model
     ];
 
     function destination () {
-        return $this->belongsTo('App\Models\Destinations', 'destination_id');
+        return $this->belongsTo('api\Models\Destinations', 'destination_id');
     }
 }

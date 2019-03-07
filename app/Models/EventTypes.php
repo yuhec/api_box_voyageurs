@@ -1,9 +1,9 @@
 <?php
 
-namespace App;
+namespace api\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Uuids;
+use api\Uuids;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class EventTypes extends Model

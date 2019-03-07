@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace api\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -14,7 +14,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $namespace = 'App\Http\Controllers';
+    protected $namespace = 'api\Http\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -71,92 +71,92 @@ class RouteServiceProvider extends ServiceProvider
              ->group(base_path('routes/api.php'));
 
         Route::prefix('destinations')
-             ->middleware('destinations')
+             ->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/destinations.php'));
 
         Route::prefix('activity-types')
-             ->middleware('activityTypes')
+             ->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/activityTypes.php'));
 
         Route::prefix('addresses')
-             ->middleware('addresses')
+             ->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/addresses.php'));
 
         Route::prefix('boxes')
-             ->middleware('boxes')
+             ->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/boxes.php'));
 
         Route::prefix('categories')
-             ->middleware('categories')
+             ->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/categories.php'));
 
         Route::prefix('category-events')
-             ->middleware('categoryEvents')
+             ->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/categoryEvents.php'));
 
         Route::prefix('contents')
-             ->middleware('contents')
+             ->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/contents.php'));
 
         Route::prefix('events')
-             ->middleware('events')
+             ->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/events.php'));
 
         Route::prefix('event-types')
-             ->middleware('eventTypes')
+             ->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/eventTypes.php'));
 
         Route::prefix('favorites')
-             ->middleware('favorites')
+             ->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/favorites.php'));
 
         Route::prefix('genders')
-             ->middleware('genders')
+             ->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/genders.php'));
 
         Route::prefix('items')
-             ->middleware('items')
+             ->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/items.php'));
 
         Route::prefix('marks')
-             ->middleware('marks')
+             ->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/marks.php'));
 
         Route::prefix('my-boxes')
-             ->middleware('myBoxes')
+             ->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/myBoxes.php'));
 
         Route::prefix('notifications')
-             ->middleware('notifications')
+             ->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/notifications.php'));
 
         Route::prefix('photo-events')
-             ->middleware('photoEvents')
+             ->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/photoEvents.php'));
 
         Route::prefix('photos')
-             ->middleware('photos')
+             ->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/photos.php'));
 
         Route::prefix('users')
-             ->middleware('users')
+             ->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/users.php'));
     }

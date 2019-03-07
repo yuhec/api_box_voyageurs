@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace api\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Resources;
-use App\Models;
+use api\Http\Resources;
+use api\Models;
 use Validator;
 
 class Contents extends Controller

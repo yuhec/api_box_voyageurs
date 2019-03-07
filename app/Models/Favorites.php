@@ -1,9 +1,9 @@
 <?php
 
-namespace App;
+namespace api\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Uuids;
+use api\Uuids;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Favorites extends Model
@@ -23,9 +23,9 @@ class Favorites extends Model
     ];
 
     function event () {
-        return $this->belongsTo('App\Models\Events', 'event_id');
+        return $this->belongsTo('api\Models\Events', 'event_id');
     }
     function user () {
-        return $this->belongsTo('App\Models\Users', 'user_id');
+        return $this->belongsTo('api\Models\Users', 'user_id');
     }
 }

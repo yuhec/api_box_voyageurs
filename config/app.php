@@ -52,7 +52,9 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'app_web_ui' => env('APP_WEB_UI', 'http://localhost'),
+
+    'url' => env('API_URL', 'http://localhost'),
 
     'asset_url' => env('ASSET_URL', null),
 
@@ -169,11 +171,13 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        api\Providers\AppServiceProvider::class,
+        api\Providers\AuthServiceProvider::class,
+        // api\Providers\BroadcastServiceProvider::class,
+        api\Providers\EventServiceProvider::class,
+        api\Providers\RouteServiceProvider::class,
+
+        Barryvdh\Cors\ServiceProvider::class,
 
     ],
 

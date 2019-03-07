@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources;
+namespace api\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -14,6 +14,14 @@ class Boxes extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+          'id' => $this->id,
+          'name' => $this->name,
+          'comments' => $this->comments,
+          'destination' => new Destinations($this->destination_id),
+          'photo' => new Photos($this->photo_id),
+          'created_at' => $this->created_at->toDateTimeString(),
+          'updated_at' => $this->updated_at->toDateTimeString(),
+        ];
     }
 }

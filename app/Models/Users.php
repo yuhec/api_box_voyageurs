@@ -1,9 +1,9 @@
 <?php
 
-namespace App;
+namespace api\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Uuids;
+use api\Uuids;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Users extends Model
@@ -23,15 +23,15 @@ class Users extends Model
     ];
 
     function gender () {
-        return $this->belongsTo('App\Models\Gender', 'gender_id');
+        return $this->belongsTo('api\Models\Gender', 'gender_id');
     }
     function photo () {
-        return $this->belongsTo('App\Models\Photos', 'photo_id');
+        return $this->belongsTo('api\Models\Photos', 'photo_id');
     }
     function shipping_address () {
-        return $this->belongsTo('App\Models\Addresses', 'shipping_address_id');
+        return $this->belongsTo('api\Models\Addresses', 'shipping_address_id');
     }
     function billing_address () {
-        return $this->belongsTo('App\Models\Addresses', 'billing_address_id');
+        return $this->belongsTo('api\Models\Addresses', 'billing_address_id');
     }
 }

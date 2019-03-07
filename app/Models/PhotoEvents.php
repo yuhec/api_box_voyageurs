@@ -1,9 +1,9 @@
 <?php
 
-namespace App;
+namespace api\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Uuids;
+use api\Uuids;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PhotoEvents extends Model
@@ -23,9 +23,9 @@ class PhotoEvents extends Model
     ];
 
     function photo () {
-        return $this->belongsTo('App\Models\Photos', 'photo_id');
+        return $this->belongsTo('api\Models\Photos', 'photo_id');
     }
     function event () {
-        return $this->belongsTo('App\Models\Events', 'event_id');
+        return $this->belongsTo('api\Models\Events', 'event_id');
     }
 }

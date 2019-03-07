@@ -1,9 +1,9 @@
 <?php
 
-namespace App;
+namespace api\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Uuids;
+use api\Uuids;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Contents extends Model
@@ -23,9 +23,9 @@ class Contents extends Model
     ];
 
     function box () {
-        return $this->belongsTo('App\Models\Boxes', 'box_id');
+        return $this->belongsTo('api\Models\Boxes', 'box_id');
     }
     function item () {
-        return $this->belongsTo('App\Models\Items', 'item_id');
+        return $this->belongsTo('api\Models\Items', 'item_id');
     }
 }

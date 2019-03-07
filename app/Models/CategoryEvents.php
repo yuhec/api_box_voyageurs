@@ -1,9 +1,9 @@
 <?php
 
-namespace App;
+namespace api\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Uuids;
+use api\Uuids;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CategoryEvents extends Model
@@ -23,12 +23,12 @@ class CategoryEvents extends Model
     ];
 
     function category () {
-        return $this->belongsTo('App\Models\Categories', 'category_id');
+        return $this->belongsTo('api\Models\Categories', 'category_id');
     }
     function event () {
-        return $this->belongsTo('App\Models\Events', 'event_id');
+        return $this->belongsTo('api\Models\Events', 'event_id');
     }
     function box () {
-        return $this->belongsTo('App\Models\Boxes', 'box_id');
+        return $this->belongsTo('api\Models\Boxes', 'box_id');
     }
 }
