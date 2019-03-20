@@ -18,8 +18,7 @@ class Boxes extends JsonResource
           'id' => $this->id,
           'name' => $this->name,
           'comments' => $this->comments,
-          'destination' => new Destinations($this->destination_id),
-          'photo' => new Photos($this->photo_id),
+          'destination' => new Destinations($this->destination),
           'created_at' => $this->created_at->toDateTimeString(),
           'updated_at' => $this->updated_at->toDateTimeString(),
         ];

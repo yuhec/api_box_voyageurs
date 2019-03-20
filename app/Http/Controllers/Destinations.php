@@ -10,49 +10,59 @@ use Validator;
 class Destinations extends Controller
 {
 
-    private static $validationRules = [
-        'city' => 'required|string|max:255',
-        'country' => 'required|string|max:255',
-    ];
+  private static $validationRules = [
+    'city' => 'required|string|max:255',
+    'country' => 'required|string|max:255',
+    'photo' => 'required|array',
+  ];
 
-    public function index (Request $request) {
-        $elements = Models\Destinations::paginate($request->input('results_per_page'));
+  public function index (Request $request) {
+    $elements = Models\Destinations::paginate($request->input('results_per_page'));
 
-        return Resources\Destinations::collection($elements);
+    return Resources\Destinations::collection($elements);
+  }
+  public function show ($id) {
+    return new Resources\Destinations(Models\Destinations::findOrFail($id));
+  }
+  public function create (Request $request) {
+    $validator = Validator::make($request->all(), static::$validationRules);
+
+    if ($validator->fails()) {
+      return abort(400, $validator->errors()->__toString());
     }
-    public function show ($id) {
-        return new Resources\Destinations(Models\Destinations::findOrFail($id));
+
+    $photo_request = new Request();
+    $photo_request->replace($request->input('photo'));
+    $photo = Photos::store($photo_request);
+
+    $element = new Models\Destinations;
+    $element->photo_id = $photo->id;
+    $element->fill($request->except(['photo']));
+    $element->save();
+
+    return $element;
+  }
+  public function update (Request $request, $id) {
+    $validator = Validator::make($request->all(), static::$validationRules);
+
+    if ($validator->fails()) {
+      return abort(400, $validator->errors()->__toString());
     }
-    public function create (Request $request) {
-        $validator = Validator::make($request->all(), static::$validationRules);
 
-        if ($validator->fails()) {
-            return abort(400, $validator->errors()->__toString());
-        }
+    $photo_request = new Request();
+    $photo_request->replace($request->input('photo'));
+    Photos::update($photo_request, $request->input('photo')['id']);
 
-        $element = new Models\Destinations;
-        $element->fill($request->all());
-        $element->save();
+    $element = Models\Destinations::findOrFail($id);
+    $element->fill($request->except(['photo', 'destination']));
+    $element->save();
 
-        return $element;
-    }
-    public function update (Request $request, $id) {
-        $validator = Validator::make($request->all(), static::$validationRules);
+    return $element;
+  }
+  public function delete ($id) {
+    $element = Models\Destinations::findOrFail($id);
+    $element->delete();
 
-        if ($validator->fails()) {
-            return abort(400, $validator->errors()->__toString());
-        }
-
-        $element = Models\Destinations::findOrFail($id);
-        $element->fill($request->all());
-        $element->save();
-
-        return $element;
-    }
-    public function delete ($id) {
-        $element = Models\Destinations::findOrFail($id);
-        $element->delete();
-
-        return new Resources\Destinations($element);
-    }
+    return new Resources\Destinations($element);
+  }
 }
